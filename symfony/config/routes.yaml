@@ -1,0 +1,53 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+fetchProducts:
+    path: /api/fetchProducts
+    controller: App\Controller\ShopController::fetchProducts
+
+fetchProduct:
+    path: /api/fetchProduct/{sku}
+    controller: App\Controller\ShopController::fetchProductBySku
+
+addProduct:
+    path: /api/addProduct
+    controller: App\Controller\ShopController::addProducts
+    methods: POST
+
+setPrice:
+    path: /api/setPrice
+    controller: App\Controller\ShopController::setPrice
+    methods: POST
+
+setDiscount:
+    path: /api/setDiscount
+    controller: App\Controller\ShopController::setDiscount
+    methods: POST
+
+removeProduct:
+    path: /api/removeProduct/{sku}
+    controller: App\Controller\ShopController::removeProduct
+    methods: DELETE
+
+removeDiscount:
+    path: /api/removeDiscount/{sku}
+    controller: App\Controller\ShopController::removeDiscount
+    methods: DELETE
+
+createBundle:
+    path: /api/createBundle
+    controller: App\Controller\ShopController::createBundle
+    methods: POST
+
+submitOrder:
+    path: /api/submitOrder
+    controller: App\Controller\ShopController::submitOrder
+    methods: POST
+
+getOrder:
+    path: /api/getOrder/{orderId}
+    controller: App\Controller\ShopController::getOrder
+
+api_login_check:
+    path: /api/login_check

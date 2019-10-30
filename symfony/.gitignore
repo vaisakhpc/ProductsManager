@@ -1,19 +1,22 @@
 ###> symfony/framework-bundle ###
-symfony/.env
-symfony/.env.local.php
-symfony/public/bundles/
-symfony/var/
-symfony/vendor/
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+/var/
+/vendor/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
-symfony/.phpunit
-symfony/.phpunit.result.cache
-symfony/phpunit.xml
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
 ###< symfony/phpunit-bridge ###
 
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
 
-*.DS_Store
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###

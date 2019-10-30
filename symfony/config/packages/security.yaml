@@ -1,0 +1,48 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        App\Security\User: plaintext
+    providers:
+        in_memory: { memory: null }
+        app.provider:
+            id: App\Security\UserProvider
+    firewalls:
+        login:
+            pattern:  ^/api/login
+            stateless: true
+            anonymous: true
+            provider: app.provider
+            json_login: # or form_login
+                check_path:               /api/login_check  #same as the configured route
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        api:
+            pattern:   ^/api/
+            stateless: true
+            provider: app.provider
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/addProduct, roles: ROLE_ADMIN }
+        - { path: ^/api/setPrice, roles: ROLE_ADMIN }
+        - { path: ^/api/setDiscount, roles: ROLE_ADMIN }
+        - { path: ^/api/removeProduct, roles: ROLE_ADMIN }
+        - { path: ^/api/removeDiscount, roles: ROLE_ADMIN }
+        - { path: ^/api/createBundle, roles: ROLE_ADMIN }
+        - { path: ^/api/submitOrder, roles: ROLE_USER }
+        # - { path: ^/profile, roles: ROLE_USER }
